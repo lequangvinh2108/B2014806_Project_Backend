@@ -1,12 +1,10 @@
 const app = require("./app");
 const config = require("./app/config");
 
-// const PORT = config.app.port;
+
 const MongoDB = require("./app/utils/mongodb.util");
 
-// app.listen(PORT, () => {
-//     console.log('Server is running on port ${PORT}.');
-// });
+
 
 async function startServer() {
     try {

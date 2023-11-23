@@ -1,20 +1,23 @@
 const express = require("express");
-
 const cors = require("cors");
-
 const app = express();
 const ApiError = require("./app/api-error");
 
 const productsRouter = require("./app/routes/product.route");
+const usersRouter = require("./app/routes/user.route");
+const cartRoutes = require("./app/routes/cart.route");
+const orderRouter = require("./app/routes/order.route");
 
 app.use(cors());
 app.use(express.json());
-
 app.get("/", (req, res) => {
     res.json({ message: "Chào mừng bạn đến với ứng dụng Books Store" });
 });
 
 app.use("/api/products", productsRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/carts", cartRoutes);
+app.use("/api/orders", orderRouter);
 
 // Middleware xử lý lỗi
 app.use((req, res, next) => {
