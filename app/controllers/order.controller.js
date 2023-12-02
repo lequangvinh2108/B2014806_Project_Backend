@@ -50,3 +50,27 @@ exports.getAllOrders = async(req, res, next) => {
         next(new ApiError(500, 'An error occurred while getting all orders'));
     }
 };
+
+exports.deleteOrder = async(req, res, next) => {
+    try {
+        const orderService = new OrderService(MongoDB.client);
+        const { userId, orderId } = req.params;
+        const result = await orderService.deleteOrder(userId, orderId);
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        next(new ApiError(500, 'An error occurred while deleting the order'));
+    }
+};
+
+exports.deleteOrderById = async(req, res, next) => {
+    try {
+        const orderService = new OrderService(MongoDB.client);
+        const { orderId } = req.params;
+        const result = await orderService.deleteOrderById(orderId);
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        next(new ApiError(500, 'An error occurred while deleting the order'));
+    }
+};
