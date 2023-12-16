@@ -2,12 +2,11 @@ const OrderService = require('../services/order.service');
 const ApiError = require('../api-error');
 const MongoDB = require("../utils/mongodb.util");
 
-
 exports.createOrder = async(req, res, next) => {
     try {
         const orderService = new OrderService(MongoDB.client);
-        const { userId, cart, address, name, phone, totalMoney } = req.body;
-        const result = await orderService.createOrder(userId, cart, address, name, phone, totalMoney);
+        const { userId, cart, address, name, phone, totalMoney, deliveryInstructions } = req.body;
+        const result = await orderService.createOrder(userId, cart, address, name, phone, totalMoney, deliveryInstructions);
         res.json(result);
     } catch (error) {
         console.error(error);
