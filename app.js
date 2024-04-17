@@ -7,6 +7,12 @@ const productsRouter = require("./app/routes/product.route");
 const usersRouter = require("./app/routes/user.route");
 const cartRoutes = require("./app/routes/cart.route");
 const orderRouter = require("./app/routes/order.route");
+const shipRouter = require("./app/routes/ship.route");
+const ListProduct = require("./app/routes/listproduct.route");
+const Warehouse = require("./app/routes/warehouse.route");
+const ReView = require("./app/routes/review.route");
+const Contact = require("./app/routes/contact.route");
+const Discount = require("./app/routes/discount.route");
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +24,12 @@ app.use("/api/products", productsRouter);
 app.use("/api/auth", usersRouter);
 app.use("/api/carts", cartRoutes);
 app.use("/api/orders", orderRouter);
+app.use("/api/ship", shipRouter);
+app.use("/api/listproduct", ListProduct);
+app.use("/api/warehouse", Warehouse);
+app.use("/api/reviews", ReView);
+app.use("/api/contacts", Contact);
+app.use("/api/discounts", Discount);
 
 // Middleware xử lý lỗi
 app.use((req, res, next) => {

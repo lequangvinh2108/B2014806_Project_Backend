@@ -7,12 +7,18 @@ class ProductService {
 
     extractProductData(payload) {
         const product = {
+            code: payload.code,
             name: payload.name,
             price: payload.price,
-            writer: payload.writer,
+            importprice: payload.importprice,
+            mass: payload.mass,
+            quantity: payload.quantity, //
             description: payload.description,
             imgUrl: payload.imgUrl,
-            favorite: payload.favorite,
+            // importday: payload.importday, 
+            // expiry: payload.expiry, 
+            // placeproduction: payload.placeproduction, 
+            // favorite: payload.favorite,
         };
         // Remove undefined fields
         Object.keys(product).forEach(
@@ -57,6 +63,16 @@ class ProductService {
         return result.value;
     }
 
+    async updateCode(code, payload) {
+        const filter = { code: code };
+        const update = this.extractProductData(payload);
+        const result = await this.Products.findOneAndUpdate(
+            filter, { $set: update }, { returnDocument: "after" }
+        );
+        return result.value;
+    }
+
+
     async delete(id) {
         const result = await this.Products.findOneAndDelete({
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
@@ -72,6 +88,29 @@ class ProductService {
         const result = await this.Products.deleteMany({});
         return result.deletedCount;
     }
+
+    async findByCode(code) {
+        return await this.Products.findOne({
+            code: code,
+        });
+    }
+
+    async updateDiscount(code, payload) {
+        const filter = { code: code };
+        const update = {
+            $set: {
+                discount: payload.discount,
+                startDay: payload.startDay,
+                finishedDay: payload.finishedDay
+            }
+        };
+        const result = await this.Products.findOneAndUpdate(
+            filter, update, { returnDocument: "after" }
+        );
+        return result.value;
+    }
+
+
 }
 
 module.exports = ProductService;

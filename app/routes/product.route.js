@@ -16,4 +16,8 @@ router.route("/:id")
     .put(products.update)
     .delete(products.delete);
 
+router.put("/updateCode/:code", products.updateCode);
+router.get("/findByCode/:code", products.findByCode);
+router.put("/updateDiscount/:code", products.updateDiscount);
+
 module.exports = router;

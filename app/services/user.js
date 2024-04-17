@@ -11,6 +11,7 @@ class UserService {
             email: payload.email,
             password: payload.password,
             isAdmin: payload.isAdmin || false,
+            isShipper: payload.isShipper || false,
 
         };
         // Remove undefined fields
